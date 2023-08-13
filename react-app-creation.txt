@@ -1,0 +1,38 @@
+npx create-react-app admin-app
+npm install --save react-bootstrap bootstrap
+npm install --save react-router-dom
+
+Playlists: https://www.youtube.com/watch?v=tvdFYmJEaw4&list=PLB_Wd4-5SGAYsxD4JGaVdXll3PnoyI-AM&index=1
+
+Steps:
+1. first install node LTS version from nodejs.org
+2. VS Code
+3. Postman tool
+4. Gitbash
+5. create a folder and 3 subfolders back end front end and admin app
+6. Now go into mern-back-end directory
+
+7
+mern-back-end:
+a. npm init (couple of question swill come untill successfull)
+b. npm install --save express express-validator mongoose
+c. create a folder "src" at root level and inside that create a file index.js|server.js|index.server.js to create a server first
+d. create a .env file at root level and define a varibale a PORT number in which hte server will run say 2000/9000 etc
+e. npm install --save dotenv
+f. check if the server port is running as node src/index.server.js
+g. create two routes one for get and another post for sample check
+h. npm install --save-dev nodemon   to keep running all time go to package.json scripts block and remove the test and add below line 
+"start": "nodemon ./src/index.server.js" after that once you call "npm start" it will continue running on the server 
+i. npm install --save body-parser  for pass the json data instead of // app.use(express.json());
+j. now create the mongo db database in atlas mongo  [u: mrinsss p: p2NOZaB8edIZbwnK ] mongodb+srv://mrinsss:<password>@cluster0.h74o8.mongodb.net/<dbname>?retryWrites=true&w=majority and connect with mongoose connection
+k. define db config in env file and pull in app file
+l. to maintain structure in express its an unopinion framework but we will make a certain structure. for that create routes, models, controllers folders inside src. routes=> for api defn, models => database design defn , controllers => logic defn 
+m. create first api routes in user.js for signin
+n. import this routes in your server file. Now we need a middleware to manipualte data between sending and receiving 
+o. now create a model for user using mongoose Schema and export it for use. also for password virtual field in monggose as in user model 
+p. for password use bcrypt pacakge: npm install --save bcrypt
+Note: throw new MongooseError('Query.prototype.exec() no longer accepts a callback');
+q.now the signup api is implemented using models / routes / controllers .
+
+
+
