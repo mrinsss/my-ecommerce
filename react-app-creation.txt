@@ -15,7 +15,7 @@ Steps:
 7
 mern-back-end:
 a. npm init (couple of question swill come untill successfull)
-b. npm install --save express express-validator mongoose
+b. npm install --save express express-validator mongoose 
 c. create a folder "src" at root level and inside that create a file index.js|server.js|index.server.js to create a server first
 d. create a .env file at root level and define a varibale a PORT number in which hte server will run say 2000/9000 etc
 e. npm install --save dotenv
@@ -33,6 +33,9 @@ o. now create a model for user using mongoose Schema and export it for use. also
 p. for password use bcrypt pacakge: npm install --save bcrypt
 Note: throw new MongooseError('Query.prototype.exec() no longer accepts a callback');
 q.now the signup api is implemented using models / routes / controllers .
+r. now use the json web token for authenticate in case of sign in npm install --save jsonwebtoken
+s. also required signin middleware to verify token method written in auth controller 
+t. now create the same signup signin for admin type and for that create admin folder under controllers and routes 
 
 
 

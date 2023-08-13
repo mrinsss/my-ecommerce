@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // routes 
-const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
+const adminAuthRoutes = require('./routes/admin/auth');
 
 // environment variables or say constants
 env.config();
@@ -18,8 +19,8 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }
 });
 
 app.use(bodyParser()); // app.use(express.json()); // middleware to receive the json data request
-app.use('/api', userRoutes);
-
+app.use('/api', authRoutes); // user api routes
+app.use('/api', adminAuthRoutes); //  admin api routes
 // api routes define samples
 /*
 app.get('/', (req, res, next) => {
