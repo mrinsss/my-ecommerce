@@ -51,7 +51,7 @@ exports.signin = (req, res) => {
     .then((user) => {
       if (user) {
         if (user.authenticate(req.body.password)) {
-          const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+          const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: "1h",
           });
           // destructuring req body
@@ -82,10 +82,11 @@ exports.signin = (req, res) => {
 };
 
 // require sign in token validation
+/*
 exports.requireSignin = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const userTok = jwt.verify(token, process.env.JWT_SECRET);
   // console.log(token);
   req.user = userTok;
   next();
-};
+};*/

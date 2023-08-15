@@ -1,12 +1,13 @@
 const express = require('express');
 const env = require('dotenv');
 const app = express();
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // routes 
 const authRoutes = require('./routes/auth');
 const adminAuthRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/category');
 
 // environment variables or say constants
 env.config();
@@ -18,9 +19,11 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }
     console.log('Database connected')
 });
 
-app.use(bodyParser()); // app.use(express.json()); // middleware to receive the json data request
+// app.use(bodyParser()); 
+app.use(express.json()); // middleware to receive the json data request
 app.use('/api', authRoutes); // user api routes
 app.use('/api', adminAuthRoutes); //  admin api routes
+app.use('/api', categoryRoutes); 
 // api routes define samples
 /*
 app.get('/', (req, res, next) => {
