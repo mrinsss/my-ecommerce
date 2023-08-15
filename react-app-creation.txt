@@ -9,11 +9,10 @@ Steps:
 2. VS Code
 3. Postman tool
 4. Gitbash
-5. create a folder and 3 subfolders back end front end and admin app
+5. create a folder(my-ecommerce) and 3 subfolders 1. mern-back-end,  2. admin-app, 3. ecommerce-front-end 
 6. Now go into mern-back-end directory
-
-7
-mern-back-end:
+**************  *****************************
+7. Go inside the folder mern-back-end:
 a. npm init (couple of question swill come untill successfull)
 b. npm install --save express express-validator mongoose 
 c. create a folder "src" at root level and inside that create a file index.js|server.js|index.server.js to create a server first
@@ -36,6 +35,32 @@ q.now the signup api is implemented using models / routes / controllers .
 r. now use the json web token for authenticate in case of sign in npm install --save jsonwebtoken
 s. also required signin middleware to verify token method written in auth controller 
 t. now create the same signup signin for admin type and for that create admin folder under controllers and routes 
+*********************** **************************
+8. Go inside the root folder and create a react application for admin application also using React command: npx create-react-app admin-app
+now we will do some settings as efault port will be 3000 but we will make 4000 as port inside pacakge.json file under scripts block start part as like, set PORT 4000 && react-scripts-start 
+a. we will use bootstrap react library for admin app layout design. https://react-bootstrap.netlify.app/docs/getting-started/introduction
+b. npm install react-bootstrap bootstrap --save 
+c. npm install --save react-router-dom
+d. clean the app.js file remove the html under app class also logo.svg file. clean app.css but you can keep the file and add some css inside index.css include some fonts from fonts.google.com also change the title from public/index.html and add the fonts below the title tag also add the css cdn link from bootstrap.
+e. create folders inside the src folder i. components - Layout ii. containers
+f. create a file index.js inside Layout folder and type rafce as short key to generate a functional component. [install vs code plugin react-snippets]
+g. now create some pages. Home/Signin/Signup inside the containers first. and index pages insdide those.
+h. now use react router dom in App.js file help: https://stackoverflow.com/questions/69843615/switch-is-not-exported-from-react-router-dom 
+import { BrowserRouter,  Routes, // instead of "Switch"  Route, } from "react-router-dom";
+add following inside app class div.
+      <Router>
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/signin" Component={Signin} />
+          <Route path="/signup" Component={Signup} />
+        </Routes>
+      </Router>
+i. Now go to Header component and signin signup link using react router dom instead of using Nav of bootstrap. import { NavLink, Link } from 'react-router-dom';
+j. now add Layout component in signin and signup page to get the same header as home page 
+k. now go to bootstrap forms for signin page
+l. Now lets create a generic compoent for Input type field which can be used anywhere. we will do it inside components/UI/Input/index.js file
+
+
 
 
 
