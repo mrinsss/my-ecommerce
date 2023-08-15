@@ -3,6 +3,16 @@ npm install --save react-bootstrap bootstrap
 npm install --save react-router-dom
 
 Playlists: https://www.youtube.com/watch?v=tvdFYmJEaw4&list=PLB_Wd4-5SGAYsxD4JGaVdXll3PnoyI-AM&index=1
+Ep-01: Mern Stack Project | Ecommerce Website | Flipkart Clone
+Ep-02: Mern Stack Project | Ecommerce Website | Flipkart Clone User And Admin Rest Api
+Ep-03: Mern Stack Project | Ecommerce Flipkart Clone | Admin Login Rest Api
+Ep-04: Mern Stack Project | Ecommerce Website | Admin App Layout Setup
+Ep-05: Mern Stack Project | Ecommerce Website | Api Request Validation
+Ep-06: Mern Stack Project | Ecommerce Website | Categories and Sub Categories Rest Api
+Ep-07: MERN Stack Project | Ecommerce Website | Product Creation Api
+Ep-08: MERN Stack Project | Ecommerce Website | Add product to cart api
+Ep-09: MERN Stack Project | Ecommerce Website | Fix Cart Api & Update Category Api
+Ep-10: MERN Stack Project | Ecommerce Website | Admin Redux Store Setup
 
 Steps:
 1. first install node LTS version from nodejs.org
@@ -59,6 +69,10 @@ i. Now go to Header component and signin signup link using react router dom inst
 j. now add Layout component in signin and signup page to get the same header as home page 
 k. now go to bootstrap forms for signin page
 l. Now lets create a generic compoent for Input type field which can be used anywhere. we will do it inside components/UI/Input/index.js file
+******************** ***************************
+9. Go inside the folder mern-back-end:
+a. express-validator add in auth.js file like const { check } = require("express-validator"); help https://express-validator.github.io/docs/api/check
+b. now in controller add validation result. and for that create a seperate file for validtors as a middleware like validateSigninRequest, validateSignupRequest, isRequestValidated. create a file src/validators/auth.js 
 
 
 
