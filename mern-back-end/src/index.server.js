@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const adminAuthRoutes = require('./routes/admin/auth');
 const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
 
 // environment variables or say constants
 env.config();
@@ -24,6 +25,7 @@ app.use(express.json()); // middleware to receive the json data request
 app.use('/api', authRoutes); // user api routes
 app.use('/api', adminAuthRoutes); //  admin api routes
 app.use('/api', categoryRoutes); 
+app.use('/api', productRoutes); 
 // api routes define samples
 /*
 app.get('/', (req, res, next) => {

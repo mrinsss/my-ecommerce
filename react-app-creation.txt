@@ -2,6 +2,16 @@ npx create-react-app admin-app
 npm install --save react-bootstrap bootstrap
 npm install --save react-router-dom
 
+Github Links
+Back End Source Code
+github.com/Rizwan17/ecommerce-back-end-rest-server.git
+
+Admin App Source Code
+github.com/Rizwan17/ecommerce-admin-app.git
+
+Flipkart Clone
+github.com/Rizwan17/ecommerce-flipkart-clone.git
+
 Playlists: https://www.youtube.com/watch?v=tvdFYmJEaw4&list=PLB_Wd4-5SGAYsxD4JGaVdXll3PnoyI-AM&index=1
 Ep-01: Mern Stack Project | Ecommerce Website | Flipkart Clone
 Ep-02: Mern Stack Project | Ecommerce Website | Flipkart Clone User And Admin Rest Api
@@ -73,6 +83,34 @@ l. Now lets create a generic compoent for Input type field which can be used any
 9. Go inside the folder mern-back-end:
 a. express-validator add in auth.js file like const { check } = require("express-validator"); help https://express-validator.github.io/docs/api/check
 b. now in controller add validation result. and for that create a seperate file for validtors as a middleware like validateSigninRequest, validateSignupRequest, isRequestValidated. create a file src/validators/auth.js 
+c. little bit of code cleaning like requireSignin used in both controllers in admin/auth.js and auth.js (though it is not used in now) we will do it in a common file. so create a folder common-middleware
+d. also remove body-parser as express already have it as express.json()
+e. Now move to Categories / Sub-Categories Rest API. Create a model for category first. then create category route. then for slug install new pacakge as command npm install --save slugify
+f. now add the authentication as only loggedin admin can create category inside common middleware
+g. now write a recursive function to fetch the categoeirs inside category controller called "genRecursiveCategory" when category list API calling is made.
+h. now wok with product creation rest apis. We need multer package for image uploads "npm install --save multer" and also shortid for file name "npm install --save shortid"
+i. create uploads/product folder inside src folder path 
+k. things to remember in case of using multer are below.
+#######
+const multer  = require('multer');
+const shortid = require('shortid');
+const path = require('path');
+const multerStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // cb(null, '../../uploads/product')
+        cb(null, path.join(path.dirname(__dirname), 'uploads/product'))
+    },
+    filename: function (req, file, cb) {
+        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        // cb(null, file.fieldname + '-' + uniqueSuffix)
+        cb(null, shortid.generate() + '-'  + Math.round(Math.random() * 1E9) + '-' + file.originalname)
+    }
+});
+const uploadPicMiddle = multer({ storage: multerStorage });
+uploadPicMiddle.array('productPicture') or uploadPicMiddle.single('productPicture') can be used as middlewares
+#######
+
+l. Now we have to create the product cart APIs
 
 
 

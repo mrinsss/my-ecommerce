@@ -19,6 +19,13 @@
 /ecommerce-front-end/.env
 /ecommerce-back-end/.env
 /admin-app/.env
+
+#uploads folder
+/mern-back-end/src/uploads
+/ecommerce-front-end/src/uploads
+/ecommerce-back-end/src/uploads
+/admin-app/src/uploads
+
 # misc
 .DS_Store
 .env.local
