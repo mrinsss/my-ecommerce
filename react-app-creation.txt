@@ -110,7 +110,7 @@ const uploadPicMiddle = multer({ storage: multerStorage });
 uploadPicMiddle.array('productPicture') or uploadPicMiddle.single('productPicture') can be used as middlewares
 #######
 
-l. Now we have to create the product cart APIs
+l. Now we have to create the product cart APIs, for that we have to create cart models, routes and controllers as well.
 
 
 

@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 const adminAuthRoutes = require('./routes/admin/auth');
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
+const cartRoutes = require('./routes/cart');
 
 // environment variables or say constants
 env.config();
@@ -26,6 +27,7 @@ app.use('/api', authRoutes); // user api routes
 app.use('/api', adminAuthRoutes); //  admin api routes
 app.use('/api', categoryRoutes); 
 app.use('/api', productRoutes); 
+app.use('/api', cartRoutes); 
 // api routes define samples
 /*
 app.get('/', (req, res, next) => {

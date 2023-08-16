@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('../models/user');
-const Category = require('../models/category');
+// const User = require('../models/user');
+// const Category = require('../models/category');
 
 const productSchema = new mongoose.Schema({
     name:{
