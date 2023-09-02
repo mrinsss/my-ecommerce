@@ -111,6 +111,13 @@ uploadPicMiddle.array('productPicture') or uploadPicMiddle.single('productPictur
 #######
 
 l. Now we have to create the product cart APIs, for that we have to create cart models, routes and controllers as well.
+m. add cart model and controllers and route 
+n. we have to fix one problem: one user one cart and multiple products
+o. we have to fix one problem:modify the cart so that when same item is added only the price and quantity got increased
+p. we have to fix one problem: cart get resetted by third time product changes happens
+-- ---
+q. now again go back to category model to take image for any category and update in that case. Add image category
+r. as the public folder are not exposed we have to add some middleware or path library methods in server.js for that
 
 
 

@@ -1,5 +1,6 @@
 const Category = require('../models/category');
 const slugify = require('slugify');
+const env = require('dotenv');
 
 function genRecursiveCategory(paramCategories, parentId = null) {
     const categoryList = [];
@@ -25,9 +26,14 @@ function genRecursiveCategory(paramCategories, parentId = null) {
 
 // add 
 exports.addCategory = (req, res) => {
+
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
+    }
+
+    if( req.file ) {
+        categoryObj.categoryImage = process.env.API_URL+'/public/category/' + req.file.filename;;
     }
     // if parent id exist
     if( req.body.parentId ) {

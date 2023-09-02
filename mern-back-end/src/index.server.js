@@ -3,7 +3,7 @@ const env = require('dotenv');
 const app = express();
 // const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const path = require('path');
 // routes 
 const authRoutes = require('./routes/auth');
 const adminAuthRoutes = require('./routes/admin/auth');
@@ -23,6 +23,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }
 
 // app.use(bodyParser()); 
 app.use(express.json()); // middleware to receive the json data request
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', authRoutes); // user api routes
 app.use('/api', adminAuthRoutes); //  admin api routes
 app.use('/api', categoryRoutes); 
