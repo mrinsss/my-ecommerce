@@ -118,8 +118,66 @@ p. we have to fix one problem: cart get resetted by third time product changes h
 -- ---
 q. now again go back to category model to take image for any category and update in that case. Add image category
 r. as the public folder are not exposed we have to add some middleware or path library methods in server.js for that
+---- --------------------------------------- ------------------------------ --------------------------------------------
+10. We will have to create signup and signin methods for admin users. (Go inside of admin-app folder)
+a. we will do it through Redux store management so that it can be handled easily. so lets try to install the required packages for this. following commands
+npm install --save redux react-redux redux-thunk 
+with the help of redux we can create the stores. 
+with the help react-redux we can connect our components with the store so we can access the information from the store.
+with the help redux-thunk we can make api calls asynchronously.
+b. create a new folder for the store management inside src called 'store' and 'actions' and 'reducers'
+c. inside store create index.js for creating a store and export default it
+import { legacy_createStore as createStore} from 'redux'; -- 4.2 version and above createStore deprecated
+d. import { Provider } from 'react-redux'; inside index.js file of root path where the app.js is kept and wrap your whole application inside the provider tag like below:
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
+);
+e. then pass the store as props for the Provider also import the store from its path like: import store from './store'; and attach a window object before pass the store so taht we can access it in browser like: window.store = store;
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
+ 
+f. now in developer tools console tab type window.store, window.store.getState() 
+g. now inside the reducers folder create a file index.js export default () => {} which is the function in store and use there like below.
+import rootReducer from '../reducers';
+const store =  createStore(rootReducer);
+h. now in rootReducer function takes two arguments i.e. Initial States & Actions
+i. now create a index.js & constants.js file within the actions folder. Now for authentication we will create a file auth.actions.js inside this and write auth actions below:
+export const login = (user)=>{
+    return (dispatch) => {
+        
+    }
+}
+j. Now write an action here for login and write a sample action constant inside constants.js file
+export const authConstants = {
+    LOGIN_REQUEST: 'LOGIN_REQUEST'
+}
+k. inside auth.constants.js use this action to dispatch
+import { authConstants } from "./constants";
+
+export const login = (user)=>{
+    return (dispatch) => {
+        dispatch({
+            type: authConstants.LOGIN_REQUEST,
+            payload: {
+                login: true
+            }
+
+        });
+    }
+}
+l. export everything from actions/index.js 
+-- ------------------ -
 
 
 
 
 
+.
