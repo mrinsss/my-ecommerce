@@ -119,7 +119,7 @@ p. we have to fix one problem: cart get resetted by third time product changes h
 q. now again go back to category model to take image for any category and update in that case. Add image category
 r. as the public folder are not exposed we have to add some middleware or path library methods in server.js for that
 ---- --------------------------------------- ------------------------------ --------------------------------------------
-10. We will have to create signup and signin methods for admin users. (Go inside of admin-app folder)
+10. We will have to create signup and signin methods for admin users. (Go inside of admin-app folder) Redux-Store Setup:
 a. we will do it through Redux store management so that it can be handled easily. so lets try to install the required packages for this. following commands
 npm install --save redux react-redux redux-thunk 
 with the help of redux we can create the stores. 
@@ -137,7 +137,7 @@ root.render(
     </React.StrictMode>
   </Provider>
 );
-e. then pass the store as props for the Provider also import the store from its path like: import store from './store'; and attach a window object before pass the store so taht we can access it in browser like: window.store = store;
+e. then pass the store as props to the Provider also import the store from its path like: import store from './store'; and attach a window object before pass the store so taht we can access it in browser like: window.store = store;
   <Provider store={store}>
     <React.StrictMode>
       <App />
@@ -163,18 +163,80 @@ k. inside auth.constants.js use this action to dispatch
 import { authConstants } from "./constants";
 
 export const login = (user)=>{
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({
             type: authConstants.LOGIN_REQUEST,
             payload: {
-                login: true
+                // login: true
+				...user
             }
 
         });
     }
 }
-l. export everything from actions/index.js 
+l. export everything from actions/index.js and use it in signin/index.js inside the containers.
+m. on form submit execute the login function import from actions like below: 
+import { login } from '../../actions';
+
+<Form onSubmit={userLogin}>, then define the userLogin inside the Signin before the return like below:
+  const userLogin = (e) => {
+	e.preventDefault();
+    const userObj = {
+      email: 'mrinsss@gmail.com',
+      password: '123456'
+    }
+    // execute the login fn
+    login(userObj);
+  }
+
+n. inside the reducers folder create a file auth.reducers.js and write following codes.
+import { authConstants } from "../actions/constants";
+const initState = {
+    name: 'Mrinmoy'
+}
+
+export default (state = initState, action ) => {
+    // return state;
+    switch(action.type) {
+        case authConstants.LOGIN_REQUEST:
+            state = {
+                ...state
+            }
+            break;
+    }
+
+    return state;
+}
+n.  now inside reducers/index.js file 
+import authReducers from "./auth.reducers";
+import { combineReducers } from 'react-redux';
+
+const rootReducer = combineReducers({
+    auth: authReducers
+});
+
+export default rootReducer;
+o. now this will not wrok. for this we have to use a hook useDispatch from Signin/index.js like below.
+import { useDispatch } from 'react-redux';
+.....
+const dispatch = useDispatch();
+.......
+dispatch(login(userObj));  
+
+p. you will get a error: Actions must be plain objects. Instead, the actual type was: 'function'. You may need to add middleware to your store setup to handle dispatching other values, such as 'redux-thunk' to handle dispatching functions. To reoslve this go to store/index.js and use the thunk middleware as said.
+import { applyMiddleware, legacy_createStore as createStore} from 'redux';
+import rootReducer from '../reducers';
+import thunk from 'redux-thunk';
+
+const store =  createStore(rootReducer, applyMiddleware(thunk) );
+
+export default store;
+q. 
+
 -- ------------------ -
+11. Now we setup Admin authentication and private Routes.
+a. 
+-- ---------------------
 
 
 

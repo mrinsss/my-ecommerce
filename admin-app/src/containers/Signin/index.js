@@ -7,14 +7,33 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Input from "../../components/UI/Input";
 
+// for store managments
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions';
+
 const Signin = () => {
+
+  const dispatch = useDispatch();
+
+  const userLogin = (evt) => {
+    evt.preventDefault();
+
+    const userObj = {
+      email: 'mrinsss@gmail.com',
+      password: '123456'
+    }
+
+    // dispatch the login fn
+    dispatch(login(userObj));
+  }
+
   return (
     <>
       <Layout>
         <Container>
           <Row style={{ marginTop: "50px" }}>
             <Col md={{ span: 6, offset: 3 }}>
-              <Form>
+              <Form onSubmit={userLogin}>
                 <Input
                   label="Email"
                   placeholder="Email"
