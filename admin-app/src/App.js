@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./containers/Home";
@@ -6,8 +6,23 @@ import Signin from "./containers/Signin";
 import Signup from "./containers/Signup";
 // import Layout from "./components/Layout";
 import PrivateRoute from "./components/HOC/PrivateRoute";
+// for store managments
+import { useDispatch, useSelector } from "react-redux";
+import { isUserLoggedIn } from "./actions";
 
 function App() {
+  
+  const auth = useSelector(state => state.auth); // to get the store value
+
+  const dispatch = useDispatch();
+
+  // just like component did mount method similar
+  useEffect(()=>{
+    if( !auth.authenticate ) {
+      dispatch( isUserLoggedIn() );
+    }
+  }, []);
+
   return (
     <div className="App">
       {/* <Layout></Layout> */}

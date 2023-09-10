@@ -297,11 +297,27 @@ export const isUserLoggedIn = () => {
     }
 }
 
-j. now got to signin page and use this 
+j. now got to signin page and use this using useEffect() hook just like component did mount example.
 
--- ---------------------
-
-
+-- ---------------------- -------------------------- --------------------------------
+12. Admin Signout and Signup
+a. we have to make some changes as useEffect for isUserLoggedIn action should be used in app.js so that it can work for every pages. Now we will add a sidebar from bootstrap. add something like below inside Home/index.js also create a style for home page
+<Container fluid>
+  <Row>
+	<Col md={2}>Sidebar</Col>
+	<Col md={10}>Container</Col>
+  </Row>
+</Container>
+b. chnage the signin/signup and Signout option using dynamic function cheking authenticate.
+c. now create a signout action and bind the action with button click inside Header/index.js as below 
+const dispatch = useDispatch(state => state.auth);
+// bind the logout
+const logout = () => {
+dispatch(signout());
+}
+d. Now start the same process for signup same as we did for signin method. work on files like actions/index.js, actions/constants.js, actions/user.actions.js, reducers/user.reducers.js, Signup/index.js 
+e. submit the form from Signup/index.js file 
+-- ---------------------- -------------------------- --------------------------------
 
 
 

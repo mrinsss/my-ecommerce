@@ -22,13 +22,6 @@ const Signin = () => {
 
   const dispatch = useDispatch();
 
-  // just like component did mount method similar
-  useEffect(()=>{
-    if( !auth.authenticate ) {
-      dispatch( isUserLoggedIn() );
-    }
-  }, []);
-
   const userLogin = (evt) => {
     evt.preventDefault();
 
