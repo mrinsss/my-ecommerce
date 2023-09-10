@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -8,23 +8,44 @@ import Row from "react-bootstrap/Row";
 import Input from "../../components/UI/Input";
 
 // for store managments
-import { useDispatch } from 'react-redux';
-import { login } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { isUserLoggedIn, login } from '../../actions';
+import { Navigate } from "react-router-dom";
 
 const Signin = () => {
+  // define state and attach the value with the input fields
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [error, setError] = useState('');
+
+  const auth = useSelector(state => state.auth); // to get the store value
 
   const dispatch = useDispatch();
+
+  // just like component did mount method similar
+  useEffect(()=>{
+    if( !auth.authenticate ) {
+      dispatch( isUserLoggedIn() );
+    }
+  }, []);
 
   const userLogin = (evt) => {
     evt.preventDefault();
 
     const userObj = {
-      email: 'mrinsss@gmail.com',
-      password: '123456'
+      email, password
     }
+    // const userObj = {
+    //   email: 'mrinsss@gmail.com',
+    //   password: '123456'
+    // }
 
     // dispatch the login fn
     dispatch(login(userObj));
+  }
+
+  if( auth.authenticate ) {
+    return <Navigate to={'/'} />
   }
 
   return (
@@ -38,15 +59,15 @@ const Signin = () => {
                   label="Email"
                   placeholder="Email"
                   type="text"
-                  value=""
-                  onChange={() => {}}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Input
                   label="Password"
                   placeholder="Password"
                   type="password"
-                  value=""
-                  onChange={() => {}}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 {/* <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>

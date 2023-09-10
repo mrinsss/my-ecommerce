@@ -234,8 +234,71 @@ export default store;
 q. 
 
 -- ------------------ -
-11. Now we setup Admin authentication and private Routes.
-a. 
+11. Now we setup Admin authentication Login and private Routes.
+a. Create a folder call helpers for API calls and install the axios pckg by command: npm i --save axios, and inside the helpers create a file axios.js to centralized the API call so that we can change the call if needed in one shot from here by using this instance of axios. also create a new file urlConfig.js inside src folder where we can define the varibales. like export const apiBaseUrl = 'http://localhost:5000 and in helpers/axios.js file write below
+import axios from 'axios';
+import { apiBaseUrl } from '../urlConfig';
+
+const axiosInstance = axios.create({
+    baseURL: apiBaseUrl,
+    // headers: {
+    //     Authorization: ''
+    // }
+});
+
+export default axiosInstance;
+
+b. now to make an api call for login go to actions/auth.actions.js file and before return the dispatch call the api using axios instance.
+c. create couple of state using useState hook in Signin/index so that the input varibale got connected for api calls like added the following in its proper place.
+const [email, setEmail] = useState();
+value={email}
+onChange={(e) => setEmail(e.target.value)}
+d. now go to auth.actions.js and call the api now you will get blocked block cors policy so you backend permission need to be allowed by allowing cors by using: npm i cors --save also add in the index.server.js file const cors = require('cors'); and const cors = require('cors');
+e. now make couple of constants for auth like LOGIN_FAILURE, LOGIN_SUCCESS and in actions/auth.actions.js file disptach the action before the api call. dispatch({type: authConstants.LOGIN_REQUEST});
+f. now in reducers/auth.reducers.js add some states for user for authenticate and also add in switch cases.
+g. now for private routes we will create higher order component inside a folder src/HOC/PrivateRoute.js like below: 
+import React from "react";
+import { Route, Navigate, Outlet } from "react-router-dom";
+const PrivateRoute = () => {
+    const token = window.localStorage.getItem('token');
+    return token ? <Outlet /> : <Navigate to="/signin" />;
+}
+export default PrivateRoute;
+Home page is private route but the signup/sigin page is public route so we have to define the home page route as private route. inside src\App.js like below:
+<Route exact path='/' element={<PrivateRoute/>}>
+	<Route exact path='/' element={<Home/>}/>
+</Route>
+
+h. now in signin js useSelector() to get the store state value. const auth = useSelector(state => state.auth); and below navigate to dashboard after login by code:
+  if( auth.authenticate ) {
+    return <Navigate to={'/'} />
+  }
+i. Now if we reload the page we loose the auth persisitent. we hve to fix it. to do this we have to return one more action isUserLoggedIn as below:
+
+export const isUserLoggedIn = () => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('token');
+        if( token ) {
+            dispatch({
+                payload:{
+                    token
+                }
+            });
+        }
+        else 
+        {
+            dispatch({
+                payload:{
+                    authenticate: false,
+                    message: "User need to login"
+                }
+            });
+        }
+    }
+}
+
+j. now got to signin page and use this 
+
 -- ---------------------
 
 
